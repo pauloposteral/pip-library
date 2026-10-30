@@ -1,0 +1,3 @@
+[mcp_servers.pip_publico]
+url = "https://mypip.site/mcp"
+enabled_tools = ["get_faq", "list_proposed_plans", "get_join_status"]

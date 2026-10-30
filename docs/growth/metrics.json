@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "phase": "private_candidate",
+  "observed_at": "2026-10-30",
+  "sources": [
+    "Release preparation records only; no adoption telemetry."
+  ],
+  "actual": {
+    "public_release": false,
+    "external_interviews_completed": 0,
+    "verified_external_installations": null,
+    "unique_users": null,
+    "repeat_users": null,
+    "external_contributors": null,
+    "paid_customers": null
+  },
+  "targets_are_hypotheses": true,
+  "targets": {
+    "interviews_day30": 5,
+    "examples_day60": 10,
+    "independently_verified_qa_workflows_day90": 1
+  },
+  "analytics_enabled": false
+}

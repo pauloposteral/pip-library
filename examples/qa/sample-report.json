@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "source_commit": null,
+  "environment": null,
+  "executed_at": null,
+  "checks": [
+    {
+      "id": "QA-001",
+      "command": null,
+      "exit_code": null,
+      "status": "NOT_TESTED",
+      "artifact": null
+    }
+  ],
+  "review": {
+    "status": "NOT_TESTED",
+    "reviewer": null
+  },
+  "release_decision": "BLOCKED",
+  "limitations": [
+    "SYNTHETIC training fixture. No project test was executed."
+  ]
+}

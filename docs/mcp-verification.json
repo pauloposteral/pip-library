@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "synthetic": false,
+  "observed_at": "2026-10-30T02:35:21.136Z",
+  "client": "Node v24.22.1",
+  "endpoint": "https://mypip.site/mcp",
+  "protocol": "2025-03-26",
+  "steps": [
+    {
+      "method": "initialize",
+      "http_status": 200,
+      "content_type": "text/event-stream",
+      "response_sha256": "a52ee47dc86bdea6354933bfb20d43baa03db28b2131d00963c04207573e97aa"
+    },
+    {
+      "method": "notifications/initialized",
+      "http_status": 202,
+      "content_type": null,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "method": "tools/list",
+      "http_status": 200,
+      "content_type": "text/event-stream",
+      "response_sha256": "868a82882ed79275b0079a44173b6201da6bd292e15e482537509ba8e454514e"
+    },
+    {
+      "method": "tools/call",
+      "http_status": 200,
+      "content_type": "text/event-stream",
+      "response_sha256": "e26356bec41f2bdd017bd58c748c62cc2d8728d56ae1fa025f6b74b60bac36ae"
+    }
+  ],
+  "status": "PASS",
+  "server_version": "0.1.0",
+  "tools": [
+    {
+      "name": "get_faq",
+      "readOnlyHint": true
+    },
+    {
+      "name": "list_proposed_plans",
+      "readOnlyHint": true
+    },
+    {
+      "name": "get_join_status",
+      "readOnlyHint": true
+    }
+  ],
+  "called_tool": "get_faq",
+  "expected_tools": [
+    "get_faq",
+    "list_proposed_plans",
+    "get_join_status"
+  ],
+  "limitations": [
+    "Raw HTTP legacy protocol only; not a Codex, Claude, Copilot or Lovable client test.",
+    "Other tools discovered but not invoked.",
+    "Response bodies and session identifiers are intentionally omitted from this public receipt."
+  ]
+}

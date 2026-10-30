@@ -1,0 +1,22 @@
+{
+  "name": "pip-public-library",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "validate": "node tools/validate-library.mjs",
+    "check": "npm test && npm run validate",
+    "release:check": "node tools/validate-library.mjs --release",
+    "mcp:smoke": "node tools/mcp-smoke.mjs"
+  },
+  "devDependencies": {
+    "yaml": "2.9.1",
+    "markdown-it": "15.0.3",
+    "smol-toml": "1.9.1"
+  }
+}

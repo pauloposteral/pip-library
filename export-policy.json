@@ -1,0 +1,426 @@
+{
+  "version": 1,
+  "review_note": "Explicit candidate inventory; approval of public redistribution remains gated. No binary or media files.",
+  "files": [
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.yml",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": ".github/workflows/validate-library.yml",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": ".gitignore",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "LICENSE",
+      "origin": "STANDARD_LICENSE_TEXT",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "MANIFEST.sha256",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "NOTICE.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "README.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "SECURITY.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/architecture-and-trust-boundaries.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/compatibility.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/current-capabilities.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/dependencies.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/examples/index.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/faq.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/getting-started.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/governance-and-monetization.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/growth/30-60-90-days.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/growth/interview-guide.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/growth/launch-kit.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/growth/metrics.json",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/integrations/claude-code.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/integrations/codex.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/integrations/lovable.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/integrations/vscode-copilot.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/license-decision.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/mcp-verification.json",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/mission.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/provenance.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/public-disclosure-policy.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/release-evidence-standard.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/release-preparation.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/security-review.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/sources.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/tutorials/contribute-an-example.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/tutorials/evidence-without-inventing-tests.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/tutorials/idea-to-brief.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/tutorials/public-mcp.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/validation-evidence.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/vision-and-roadmap.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "docs/why-pip-exists.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "examples/blueprint/task-list.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "examples/mcp/claude.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "examples/mcp/codex.toml",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "examples/mcp/portable.json",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "examples/mcp/vscode.json",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "examples/qa/README.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "examples/qa/sample-report.json",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "export-policy.json",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "legal/LICENSE-SCOPE.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "package-lock.json",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "package.json",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "release-status.json",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "skills/pip-blueprint/SKILL.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "skills/pip-mcp-setup/SKILL.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "skills/pip-release-evidence/SKILL.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "templates/evidence-manifest.json",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "templates/implementation-plan.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "templates/product-brief.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "templates/qa-matrix.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "templates/release-checklist.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "tests/library.test.mjs",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "tools/mcp-smoke.mjs",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "tools/update-manifest.mjs",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "tools/validate-library.mjs",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "pip_publico": {
+      "type": "http",
+      "url": "https://mypip.site/mcp"
+    }
+  }
+}

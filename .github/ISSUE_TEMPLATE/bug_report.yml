@@ -1,0 +1,16 @@
+name: Reproducible problem
+description: Report a documentation or workflow problem without private data.
+title: "[Bug] "
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction and actual result
+      description: Include client version, steps, expected result and actual result. Remove secrets and personal data.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and limitations
+      description: State which commands really ran. Label synthetic samples.

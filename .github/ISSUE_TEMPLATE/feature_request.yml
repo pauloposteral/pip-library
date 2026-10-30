@@ -1,0 +1,11 @@
+name: Improvement idea
+description: Propose a focused original improvement.
+title: "[Idea] "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem and smallest useful change
+      description: Explain who benefits, current workaround and how we could verify improvement.
+    validations:
+      required: true
