@@ -122,6 +122,20 @@ export function releaseIssues(status,licenseId,licenseText){
  return errors;
 }
 
+function registeredWorktreePointer(root,full){
+ try{
+  if(fs.statSync(full).size>4096)return false;
+  const match=fs.readFileSync(full,'utf8').match(/^gitdir: ([^\r\n\0]+)\r?\n?$/);
+  if(!match)return false;
+  const gitdir=fs.realpathSync(path.resolve(root,match[1]));
+  // Linked worktrees have a reciprocal pointer; an arbitrary .git file is content.
+  const back=fs.readFileSync(path.join(gitdir,'gitdir'),'utf8').trim();
+  if(fs.realpathSync(path.resolve(gitdir,back))!==fs.realpathSync(full))return false;
+  const observed=execFileSync('git',['rev-parse','--show-toplevel','--absolute-git-dir'],{cwd:root,encoding:'utf8',timeout:3000,stdio:['ignore','pipe','ignore']}).trim().split(/\r?\n/);
+  return observed.length===2&&fs.realpathSync(observed[0])===fs.realpathSync(root)&&fs.realpathSync(observed[1])===gitdir;
+ }catch{return false;}
+}
+
 export function validateDirectory(input,{release=false}={}){
  const root=path.resolve(input), errors=[];const add=(p,list)=>errors.push(...list.map(e=>({...e,path:p})));
  let policy;try{policy=JSON.parse(fs.readFileSync(path.join(root,'export-policy.json'),'utf8'));}catch{ return [issue('POLICY','Missing or invalid export policy.')];}
@@ -137,6 +151,7 @@ export function validateDirectory(input,{release=false}={}){
   const full=path.join(dir,e.name),rel=path.relative(root,full).split(path.sep).join('/');
   if(e.isSymbolicLink()){errors.push({...issue('SYMLINK','Symlink rejected.'),path:rel});continue;}
   if((rel==='.git'||rel==='node_modules')&&e.isDirectory())continue;
+  if(rel==='.git'&&e.isFile()&&registeredWorktreePointer(root,full))continue;
   if(e.isDirectory())walk(full);else if(e.isFile())found.push(rel);else errors.push({...issue('TEXT','Non-regular file rejected.'),path:rel});
  }}
  walk(root);
@@ -150,7 +165,7 @@ export function validateDirectory(input,{release=false}={}){
  for(const p of found){
   const bytes=fs.readFileSync(path.join(root,p));
   if(p!=='MANIFEST.sha256'&&hashes.get(p)!==hash(bytes))errors.push({...issue('HASH','Content hash differs or is absent.'),path:p});
-  if(bytes.length>512000||!(/\.(md|json|ya?ml|toml|mjs|txt)$/.test(p)||['LICENSE','MANIFEST.sha256','.gitignore'].includes(p))){errors.push({...issue('TEXT','Unapproved type or oversized file.'),path:p});continue;}
+  if(bytes.length>512000||!(/\.(md|json|ya?ml|toml|mjs|txt)$/.test(p)||['LICENSE','MANIFEST.sha256','.gitignore','.gitattributes'].includes(p))){errors.push({...issue('TEXT','Unapproved type or oversized file.'),path:p});continue;}
   let text;try{text=new TextDecoder('utf-8',{fatal:true}).decode(bytes);if(text.includes('\0'))throw Error();}catch{errors.push({...issue('TEXT','Not safe UTF-8 text.'),path:p});continue;}
   add(p,scanText(text));
   try{
@@ -197,7 +212,7 @@ export function scanHistory(root){
    const list=execFileSync('git',['ls-tree','-r',commit],{cwd:root,encoding:'utf8'}).trim().split('\n').filter(Boolean);
    for(const line of list){const m=line.match(/^(\d+) blob ([a-f0-9]+)\t(.+)$/);if(!m){errors.push(issue('HISTORY','Unexpected tree object.'));continue;}
     const historicalPath=m[3];errors.push(...scanText(historicalPath).map(e=>({...e,path:`historical-path:${commit}`})));
-    if(historicalPath.startsWith('"')||historicalPath.startsWith('/')||historicalPath.includes('\\')||historicalPath.split('/').includes('..')||historicalPath.split('/').some(s=>s==='node_modules'||s==='.git')||!(/\.(md|json|ya?ml|toml|mjs|txt)$/.test(historicalPath)||['LICENSE','MANIFEST.sha256','.gitignore'].includes(historicalPath)))errors.push(issue('HISTORY','Unapproved historical path or file type.'));
+    if(historicalPath.startsWith('"')||historicalPath.startsWith('/')||historicalPath.includes('\\')||historicalPath.split('/').includes('..')||historicalPath.split('/').some(s=>s==='node_modules'||s==='.git')||!(/\.(md|json|ya?ml|toml|mjs|txt)$/.test(historicalPath)||['LICENSE','MANIFEST.sha256','.gitignore','.gitattributes'].includes(historicalPath)))errors.push(issue('HISTORY','Unapproved historical path or file type.'));
     if(m[1]!=='100644')errors.push(issue('HISTORY','Unexpected historical file mode.'));
     const data=execFileSync('git',['cat-file','blob',m[2]],{cwd:root,maxBuffer:1024*1024});
     try{const text=new TextDecoder('utf-8',{fatal:true}).decode(data);if(text.includes('\0'))throw Error();errors.push(...scanText(text).map(e=>({...e,path:`${commit}:${m[3]}`})));}catch{errors.push(issue('HISTORY','Historical non-text content rejected.'));}

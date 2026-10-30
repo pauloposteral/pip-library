@@ -26,10 +26,51 @@ function hashes(root){
  fs.writeFileSync(path.join(root,'MANIFEST.sha256'),lines.join('\n')+'\n');
 }
 function has(issues, code){assert.ok(issues.some(x=>x.code===code),`Expected ${code}; got ${JSON.stringify(issues)}`);}
+function gitAt(cwd,...args){
+ return execFileSync('git',args,{cwd,encoding:'utf8',stdio:['pipe','pipe','pipe'],env:{...process.env,GIT_AUTHOR_NAME:'Synthetic',GIT_COMMITTER_NAME:'Synthetic',GIT_AUTHOR_EMAIL:'synthetic@example.invalid',GIT_COMMITTER_EMAIL:'synthetic@example.invalid'}});
+}
+function linkedFixture(t){
+ const r=fixture(t);
+ fs.copyFileSync(new URL('../.gitattributes',import.meta.url),path.join(r,'.gitattributes'));
+ const policy=JSON.parse(fs.readFileSync(path.join(r,'export-policy.json')));
+ policy.files.push({path:'.gitattributes',origin:'PIP_ORIGINAL',license:'MIT',sensitivity:'PUBLIC_CANDIDATE'});
+ fs.writeFileSync(path.join(r,'export-policy.json'),JSON.stringify(policy));
+ hashes(r);gitAt(r,'init','-q');gitAt(r,'add','.');gitAt(r,'-c','commit.gpgsign=false','commit','-qm','Synthetic worktree fixture');
+ const linked=r+'-linked';t.after(()=>fs.rmSync(linked,{recursive:true,force:true}));gitAt(r,'worktree','add','--detach',linked,'HEAD');return linked;
+}
+test('registered linked worktree validates without exporting its Git pointer',t=>{
+ assert.deepEqual(validateDirectory(linkedFixture(t)),[]);
+});
+test('arbitrary Git pointer is not an export exemption',t=>{
+ const r=fixture(t);hashes(r);fs.writeFileSync(path.join(r,'.git'),'gitdir: ../missing\n');has(validateDirectory(r),'UNLISTED');
+});
+test('Git pointer with extra payload is not an export exemption',t=>{
+ const r=linkedFixture(t);fs.appendFileSync(path.join(r,'.git'),'unreviewed payload\n');has(validateDirectory(r),'UNLISTED');
+});
+test('Git pointer copied from another worktree is not exempt',t=>{
+ const linked=linkedFixture(t),r=fixture(t);hashes(r);fs.copyFileSync(path.join(linked,'.git'),path.join(r,'.git'));has(validateDirectory(r),'UNLISTED');
+});
+test('nested Git pointer is still rejected as unlisted content',t=>{
+ const r=fixture(t);hashes(r);fs.mkdirSync(path.join(r,'nested'));fs.writeFileSync(path.join(r,'nested/.git'),'gitdir: ../missing\n');has(validateDirectory(r),'UNLISTED');
+});
+test('checkout preserves reviewed LF bytes even with autocrlf enabled',t=>{
+ const r=fs.mkdtempSync(path.join(os.tmpdir(),'pip-eol-')),clone=r+'-clone';t.after(()=>{fs.rmSync(r,{recursive:true,force:true});fs.rmSync(clone,{recursive:true,force:true});});
+ fs.writeFileSync(path.join(r,'README.md'),'Reviewed bytes.\nSecond line.\n');
+ const attributes=new URL('../.gitattributes',import.meta.url);if(fs.existsSync(attributes))fs.copyFileSync(attributes,path.join(r,'.gitattributes'));
+ gitAt(r,'init','-q');gitAt(r,'-c','core.autocrlf=false','add','.');gitAt(r,'-c','commit.gpgsign=false','commit','-qm','Synthetic checkout fixture');
+ gitAt(r,'clone','-q','--no-local','-c','core.autocrlf=true',r,clone);
+ assert.equal(fs.readFileSync(path.join(clone,'README.md'),'utf8'),'Reviewed bytes.\nSecond line.\n');
+});
 test('valid reviewed text tree passes offline structure checks',t=>{const r=fixture(t);hashes(r);assert.deepEqual(validateDirectory(r),[]);});
 test('unlisted hidden file blocks export',t=>{const r=fixture(t);hashes(r);fs.writeFileSync(path.join(r,'.hidden'),'x');has(validateDirectory(r),'UNLISTED');});
 test('missing mandatory notice blocks export',t=>{const r=fixture(t);fs.unlinkSync(path.join(r,'NOTICE.md'));hashes(r);has(validateDirectory(r),'MISSING');});
-test('symlink is rejected without following it',t=>{const r=fixture(t);hashes(r);fs.symlinkSync('/etc/hosts',path.join(r,'link'));has(validateDirectory(r),'SYMLINK');});
+for(const name of ['link','.git'])test(`directory link ${name} is rejected without following it`,t=>{
+ const r=fixture(t),outside=fs.mkdtempSync(path.join(os.tmpdir(),'pip-link-target-'));t.after(()=>fs.rmSync(outside,{recursive:true,force:true}));hashes(r);
+ fs.writeFileSync(path.join(outside,'sentinel.txt'),fakeToken);
+ fs.symlinkSync(outside,path.join(r,name),process.platform==='win32'?'junction':'dir');
+ const issues=validateDirectory(r);has(issues,'SYMLINK');assert.equal(issues.some(e=>e.code==='SENSITIVE'),false);
+ assert.equal(fs.readFileSync(path.join(outside,'sentinel.txt'),'utf8'),fakeToken);
+});
 test('changed bytes fail manifest validation',t=>{const r=fixture(t);hashes(r);fs.appendFileSync(path.join(r,'README.md'),'Change\n');has(validateDirectory(r),'HASH');});
 test('invalid UTF-8 is rejected even in a listed file',t=>{const r=fixture(t);fs.writeFileSync(path.join(r,'README.md'),Buffer.from([0xff,0xfe]));hashes(r);has(validateDirectory(r),'TEXT');});
 test('binary NUL in listed content is rejected',t=>{const r=fixture(t);fs.writeFileSync(path.join(r,'README.md'),'text\0payload');hashes(r);has(validateDirectory(r),'TEXT');});

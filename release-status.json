@@ -9,12 +9,12 @@
   "independent_review": {
     "status": "PASS",
     "reference": "docs/security-review.md",
-    "detail": "Independent review completed; both Important findings closed with author-run RED/GREEN regressions. No second independent pass or certification."
+    "detail": "Initial independent review findings closed with regressions. Separate portability review independently reproduced and reverified closure of its fixture finding; 50 tests and 71-file validation passed. Scope and limits are recorded in the review receipt."
   },
   "ci": {
     "status": "PARTIAL",
     "reference": "docs/validation-evidence.md",
-    "detail": "Local CI passes. Hosted execution is unavailable within the zero-spending constraint; private runner job was skipped."
+    "detail": "Local standalone/worktree checks pass. Hosted jobs skip because of the private-repository condition. Current account Actions budget shows 100% and blocked extra usage; separate included-minute balance was not verified. No no-cost private hosted path established."
   },
   "client_compatibility": {
     "status": "PARTIAL",

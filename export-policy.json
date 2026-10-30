@@ -3,6 +3,12 @@
   "review_note": "Explicit candidate inventory; approval of public redistribution remains gated. No binary or media files.",
   "files": [
     {
+      "path": ".gitattributes",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
       "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
       "origin": "PIP_ORIGINAL",
       "license": "MIT",

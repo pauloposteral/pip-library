@@ -1,0 +1,2 @@
+# Reviewed text must retain identical bytes on every checkout platform.
+* text=auto eol=lf

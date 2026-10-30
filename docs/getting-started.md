@@ -1,6 +1,6 @@
 # Getting started
 
-Use a standalone clone or extracted source directory for validation. Linked Git worktrees are not currently supported by the file validator: their `.git` pointer file is rejected as unlisted metadata. Do not add that pointer to the export inventory.
+Use a standalone clone, extracted source directory, or registered linked Git worktree for validation. A root `.git` pointer is excluded only after reciprocal worktree metadata and Git's reported paths match. Malformed, copied, nested or symlinked pointers remain rejected. Do not add Git metadata to the export inventory.
 
 ## Use a template
 
@@ -27,4 +27,4 @@ No paid model call or analytics event is made. The optional `npm run mcp:smoke` 
 
 Pick one guide: [Codex](integrations/codex.md), [Claude Code](integrations/claude-code.md), [VS Code/Copilot](integrations/vscode-copilot.md), [Lovable](integrations/lovable.md). Do not connect every provider to try a template. Record client version, registration, discovery and invocation separately using [compatibility](compatibility.md).
 
-The full validation path is currently verified on Linux. A separate Windows attempt encountered symlink-permission and CRLF hash failures; see [validation evidence](validation-evidence.md). Do not regenerate hashes merely to hide checkout conversion differences.
+The full validation path is verified on Linux, including linked worktrees and inherited `core.autocrlf=true`. The committed `.gitattributes` preserves LF checkout bytes. A targeted Windows probe reproduced the old symlink-permission error and verified the directory-junction fixture used by the corrected tests. The complete Windows suite remains unverified; see [validation evidence](validation-evidence.md). Do not regenerate hashes merely to hide checkout conversion differences.
