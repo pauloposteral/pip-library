@@ -14,11 +14,12 @@
   "ci": {
     "status": "PARTIAL",
     "reference": "docs/validation-evidence.md",
-    "detail": "Local standalone/worktree checks pass. Hosted jobs skip because of the private-repository condition. Current account Actions budget shows 100% and blocked extra usage; separate included-minute balance was not verified. No no-cost private hosted path established."
+    "detail": "Linux and complete native Windows checks pass locally. Hosted jobs skip because of the private-repository condition. Fresh billing API request failed with HTTP 404 and requires unavailable user scope; included capacity remains unverified. No verified zero-cost private hosted path."
   },
   "client_compatibility": {
     "status": "PARTIAL",
-    "reference": "docs/compatibility.md"
+    "reference": "docs/compatibility.md",
+    "detail": "Windows Codex 0.164.0 independently discovered all three tools and invoked get_faq through app-server. Claude Windows 2.1.310 registration/Connected and project Pending approval/Rejected observed; its discovery/invocation, Copilot/Lovable and tool-denial checks remain incomplete."
   },
   "public_access": {
     "status": "BLOCKED",
@@ -31,5 +32,17 @@
     "status": "VERIFIED",
     "reference": "docs/security-review.md",
     "detail": "Final repository refs and generated PR merge use noreply identities. The root has no parents. Earlier affected objects returned authenticated 404 in this new destination; earlier checkpoints remain private and preserved. See the dated review receipt and PR #1 for the final-head recheck."
+  },
+  "native_windows": {
+    "status": "VERIFIED",
+    "source_commit": "10d31811545cf743b5f122a5fd567df5288eb335",
+    "source_tree": "f7e5e39e37a70c1660ff6dd53bd5b34134dd9f04",
+    "reference": "docs/validation-evidence.md",
+    "detail": "Node 24.13.0/npm 11.6.2; core.autocrlf=true; check/history/fsck exit 0; 50 passed, zero failed/skipped; 71 files; four commits; temporary checkout removed."
+  },
+  "repository_scope": {
+    "status": "BLOCKED",
+    "reference": "docs/security-review.md",
+    "detail": "Manual publication requirement: concurrent PR #2/#3 add nine files outside candidate inventory/manifest; independent static review also identified a direct-send helper bypass. Preserve and reconcile all visible refs before publication. This additional manual condition is not enforced by release:check."
   }
 }

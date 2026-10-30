@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "synthetic": false,
-  "observed_at": "2026-10-30T07:19:01.906Z",
+  "observed_at": "2026-10-30T09:01:25.761Z",
   "client": "Node v24.22.1",
   "endpoint": "https://mypip.site/mcp",
   "protocol": "2025-03-26",
@@ -28,7 +28,22 @@
       "method": "tools/call",
       "http_status": 200,
       "content_type": "text/event-stream",
-      "response_sha256": "e26356bec41f2bdd017bd58c748c62cc2d8728d56ae1fa025f6b74b60bac36ae"
+      "response_sha256": "e26356bec41f2bdd017bd58c748c62cc2d8728d56ae1fa025f6b74b60bac36ae",
+      "tool": "get_faq"
+    },
+    {
+      "method": "tools/call",
+      "http_status": 200,
+      "content_type": "text/event-stream",
+      "response_sha256": "c276bf77431ab220199f057a478e9406d5029d7077f8730a9ff03b92acc94f32",
+      "tool": "list_proposed_plans"
+    },
+    {
+      "method": "tools/call",
+      "http_status": 200,
+      "content_type": "text/event-stream",
+      "response_sha256": "9e492b2cd75796f96a2b9c6e1e6bfaf045db142b9a653919a52befe3e4d93c68",
+      "tool": "get_join_status"
     }
   ],
   "status": "PASS",
@@ -47,7 +62,11 @@
       "readOnlyHint": true
     }
   ],
-  "called_tool": "get_faq",
+  "called_tools": [
+    "get_faq",
+    "list_proposed_plans",
+    "get_join_status"
+  ],
   "expected_tools": [
     "get_faq",
     "list_proposed_plans",
@@ -55,7 +74,209 @@
   ],
   "limitations": [
     "Raw HTTP legacy protocol only; not a Codex, Claude, Copilot or Lovable client test.",
-    "Other tools discovered but not invoked.",
+    "All three approved read-only tools invoked with empty arguments; no model call.",
     "Response bodies and session identifiers are intentionally omitted from this public receipt."
+  ],
+  "probe": {
+    "kind": "Temporary bounded extension of the shipped FAQ-only smoke probe",
+    "source_commit": "10d31811545cf743b5f122a5fd567df5288eb335",
+    "command": "node raw-mcp-all-tools.mjs",
+    "exit_code": 0,
+    "diagnostic_sha256": "128d36fea7c940bb1ad89222b295c11d34f0594a5b99ce40f4859ff1b4f5ce83",
+    "detail": "After reading all three empty-argument schemas and read-only annotations, the diagnostic called each approved tool and rejected RPC errors, isError=true and empty text. The temporary diagnostic is not a distributed command; tools/mcp-smoke.mjs remains FAQ-only."
+  },
+  "independent_client_checks": [
+    {
+      "date_utc": "2026-10-30",
+      "client": "Codex CLI",
+      "version": "0.164.0",
+      "platform": "Windows",
+      "endpoint": "https://mypip.site/mcp",
+      "configuration": {
+        "source": "task-owned disposable config.toml",
+        "sandbox": "read-only",
+        "approval_policy": "never",
+        "cli_auth_credentials_store": "file",
+        "mcp_oauth_credentials_store": "file",
+        "credentials_passed": false,
+        "model_turn_requests": 0,
+        "installation": "Existing executable; no install/update",
+        "personal_configuration_modified": false
+      },
+      "initialize": {
+        "utc": "2026-10-30T09:02:36.076Z",
+        "kind": "initialize",
+        "ok": true,
+        "error": null
+      },
+      "discovery": {
+        "utc": "2026-10-30T09:02:41.728Z",
+        "tools": [
+          "get_faq",
+          "get_join_status",
+          "list_proposed_plans"
+        ],
+        "all_read_only": true,
+        "toolsError": null,
+        "authStatus": "unsupported"
+      },
+      "thread": {
+        "utc": "2026-10-30T09:02:41.986Z",
+        "kind": "thread_start",
+        "ok": true,
+        "error": null
+      },
+      "faq": {
+        "utc": "2026-10-30T09:02:42.789Z",
+        "kind": "faq_invocation",
+        "ok": true,
+        "content_count": 1,
+        "content_types": [
+          "text"
+        ],
+        "result_keys": [
+          "content",
+          "structuredContent"
+        ],
+        "isError": null,
+        "error": null,
+        "result_sha256": "add3cbcc2d2af84ae81973d3e84a1c649448ecf0af156869c6e7c676d990776e"
+      },
+      "process": {
+        "utc": "2026-10-30T09:02:42.938Z",
+        "kind": "appserver_exit",
+        "code": 0,
+        "signal": null
+      },
+      "cleanup": {
+        "initial": "EPERM while wrapper process was still alive",
+        "followup": "VERIFIED: both own task directories removed by separate follow-up process, no ACL or sandbox change"
+      },
+      "limits": [
+        "Client-level MCP permission-denial NOT RUN.",
+        "No paid/model turn was submitted. Client attempted unauthenticated Responses websocket preconnection which returned HTTP401; no authenticated model access was supplied.",
+        "Task CODEX_HOME and credentials were isolated; OS-global skill metadata was automatically read by installed client, so process was not hermetic.",
+        "Other two public tools discovered, not invoked.",
+        "Successful Windows 0.164.0 result does not explain historical Linux0.166.0 timeout or alpha sandbox failure.",
+        "Initial probe result hash equals final probe; second run added content-shape evidence and file-only credential stores."
+      ],
+      "commands": [
+        "codex --version",
+        "codex app-server --listen stdio://"
+      ],
+      "rpc_methods": [
+        "initialize",
+        "mcpServerStatus/list",
+        "thread/start",
+        "mcpServer/tool/call"
+      ],
+      "sources": [
+        "https://developers.openai.com/codex/app-server",
+        "https://github.com/openai/codex/blob/main/codex-rs/config/src/types.rs"
+      ]
+    },
+    {
+      "client": "Claude Code",
+      "version": "2.1.310",
+      "platform": "Windows",
+      "endpoint": "https://mypip.site/mcp",
+      "classification": "PARTIAL",
+      "events": [
+        {
+          "utc": "2026-10-30T09:05:54.912Z",
+          "kind": "boundary",
+          "temporary_configs": true,
+          "credentials_supplied": false,
+          "model_turns": 0,
+          "personal_settings_modified": false
+        },
+        {
+          "utc": "2026-10-30T09:05:55.830Z",
+          "kind": "version",
+          "args": [
+            "--version"
+          ],
+          "exit": 0,
+          "stdout": "2.1.310 (Claude Code)\n",
+          "stderr": ""
+        },
+        {
+          "utc": "2026-10-30T09:05:58.037Z",
+          "kind": "unapproved_project",
+          "args": [
+            "mcp",
+            "get",
+            "pip"
+          ],
+          "exit": 0,
+          "stdout": "pip:\n  Scope: Project config (shared via .mcp.json)\n  Status: \u23f8 Pending approval (run `claude` to approve)\n  Type: http\n  URL: https://mypip.site/mcp\n\nTo remove this server, run: claude mcp remove pip -s project\n",
+          "stderr": ""
+        },
+        {
+          "utc": "2026-10-30T09:05:59.099Z",
+          "kind": "rejected_project",
+          "args": [
+            "mcp",
+            "get",
+            "pip"
+          ],
+          "exit": 0,
+          "stdout": "pip:\n  Scope: Project config (shared via .mcp.json)\n  Status: \u00d7 Rejected (see disabledMcpjsonServers in settings)\n  Type: http\n  URL: https://mypip.site/mcp\n\nTo remove this server, run: claude mcp remove pip -s project\n",
+          "stderr": ""
+        },
+        {
+          "utc": "2026-10-30T09:05:59.737Z",
+          "kind": "registration",
+          "args": [
+            "mcp",
+            "add",
+            "--transport",
+            "http",
+            "--scope",
+            "local",
+            "pip",
+            "https://mypip.site/mcp"
+          ],
+          "exit": 0,
+          "stdout": "Added HTTP MCP server pip with URL: https://mypip.site/mcp to local config\nFile modified: <TASK_TEMP>\\connected-config\\.claude.json [project: <TASK_TEMP>\\connected]\n",
+          "stderr": ""
+        },
+        {
+          "utc": "2026-10-30T09:06:02.912Z",
+          "kind": "health_check",
+          "args": [
+            "mcp",
+            "get",
+            "pip"
+          ],
+          "exit": 0,
+          "stdout": "pip:\n  Scope: Local config (private to you in this project)\n  Status: \u221a Connected\n  Type: http\n  URL: https://mypip.site/mcp\n\nTo remove this server, run: claude mcp remove pip -s local\n",
+          "stderr": ""
+        },
+        {
+          "utc": "2026-10-30T09:06:02.920Z",
+          "kind": "cleanup",
+          "removed": true
+        },
+        {
+          "utc": "2026-10-30T09:06:02.920Z",
+          "kind": "complete",
+          "model_turns": 0,
+          "tool_invocations": 0
+        }
+      ],
+      "limits": [
+        "mcp get Connected proves the observed client health check, not tool discovery or invocation.",
+        "Pending approval and Rejected are project-server configuration decisions. They do not prove endpoint OAuth or tool-invocation denial.",
+        "Discovery and tool invocation NOT RUN: installed CLI help and official docs expose management/health commands, no direct invoke subcommand; model-driven prompt was excluded.",
+        "Existing executable only; no install/update. CLAUDE_CONFIG_DIR and HOME/USERPROFILE task-scoped; no credentials supplied; nonessential traffic disabled."
+      ],
+      "sources": [
+        "https://code.claude.com/docs/en/mcp",
+        "https://code.claude.com/docs/en/env-vars",
+        "https://code.claude.com/docs/en/claude-directory",
+        "https://code.claude.com/docs/en/mcp-quickstart"
+      ]
+    }
   ]
 }

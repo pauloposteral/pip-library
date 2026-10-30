@@ -25,7 +25,7 @@ Limitations: automated scanning is heuristic; a human review must inspect all ex
 
 ## Additional Windows result
 
-An owner-account report preserved in the private preparation checkpoint records a separate Windows checkout test on Node 24.13.0/npm 11.6.2: 41 passing tests and 1 failing test because symlink creation returned EPERM. File validation reported hash mismatches after CRLF checkout conversion. Regenerating that local manifest did not validate the reviewed Git bytes and was not committed. The later targeted probe below reproduces the fixture failure directly; the complete Windows suite is still unverified.
+An owner-account report preserved in the private preparation checkpoint records a separate Windows checkout test on Node 24.13.0/npm 11.6.2: 41 passing tests and 1 failing test because symlink creation returned EPERM. File validation reported hash mismatches after CRLF checkout conversion. Regenerating that local manifest did not validate the reviewed Git bytes and was not committed. The later targeted probe below reproduced the fixture failure directly; the subsequent complete native run passed as recorded below.
 
 ## Portability increment — 2026-10-30 UTC
 
@@ -41,12 +41,28 @@ Source checkpoint: `2ce9a845befb436332c37b2f421f193f619365ff`. Local code correc
 | Complete linked-worktree run | VERIFIED | At the code-correction commit, locked dependency install, `npm run check`, and `node tools/validate-library.mjs --history`: exit 0; 50 passed, 71 files valid, five commits inspected |
 | Fresh dependency advisory check | VERIFIED | `npm audit --json`: exit 0; zero reported vulnerabilities in nine development dependencies |
 | Targeted native Windows probe | VERIFIED | Node 24.13.0, Git 2.45.1.windows.1: original file-symlink fixture returned EPERM. Directory junction creation succeeded; both lstat and Dirent identified a symbolic link; target sentinel was preserved. Probe exited 0 and removed its own temporary fixture |
-| Complete native Windows suite | NOT RUN | The targeted filesystem probe and Linux autocrlf tests do not certify a full Windows checkout or test run |
+| Complete native Windows suite | VERIFIED | Subsequent exact-candidate run below: 50 passed, 0 failed, 0 skipped; 71 files and four remote history commits valid; all check commands exited 0 |
 
 The portable security fixture uses a real directory junction on Windows and directory symlink on Linux. It verifies rejection at both ordinary and root `.git` paths without reading or modifying outside content. No tests were skipped and no OS privilege was enabled. The LF policy preserves checked-out bytes; hashes are never normalized to conceal differences.
 
+## Complete native Windows run
+
+Executed **2026-10-30T08:58:28.070Z–08:58:44.309Z** on Windows with Node 24.13.0 and npm 11.6.2. Exact remote commit: `10d31811545cf743b5f122a5fd567df5288eb335`; tree: `f7e5e39e37a70c1660ff6dd53bd5b34134dd9f04`. A disposable single-branch checkout used inherited `GIT_CONFIG_COUNT=1`, `GIT_CONFIG_KEY_0=core.autocrlf` and `GIT_CONFIG_VALUE_0=true`; its identity was checked before tests. No global Git settings changed.
+
+| Command | Exit | Result |
+| --- | --- | --- |
+| `npm ci --offline --ignore-scripts --no-fund --no-audit` | 0 | Nine locked packages installed from the existing cache; no online dependency fallback |
+| `npm run check` | 0 | 50 passed, 0 failed, 0 skipped; all 71 reviewed files valid |
+| `node tools/validate-library.mjs --history` | 0 | Four remote authored commits inspected; zero issues |
+| `git fsck --full` | 0 | No integrity errors |
+| `git status --porcelain` | 0 | Empty output; reviewed bytes and manifest unchanged |
+
+Real junction rejection, copied/malformed/nested Git-pointer rejection, actual linked-worktree fixtures and literal LF checkout bytes were exercised in that suite. The temporary checkout was removed after execution; process exit 0. No runner service, elevation, new global package, personal setting, billing or model call was involved. This is native local validation, not hosted CI, and proves only the named Windows/Node/npm environment and source tree. Later documentation-only receipt changes are separately validated and identified in PR #1.
+
 ## Hosted CI recheck
 
-The job's explicit condition `github.event.repository.private == false` explains the skipped runs while the repository is private. Latest inspected PR run: [41001925976](https://github.com/pauloposteral/pip-public-library/actions/runs/41001925976), with zero steps and no runner allocated. The current account UI separately showed Actions budget utilization of 100%, Usage blocked, and additional usage stopped for October 1–31, 2026. Remaining included minutes were not independently verified. Do not describe skipped jobs as executed quota failures or claim a measured remaining minute balance.
+The job's explicit condition `github.event.repository.private == false` explains the skipped runs while the repository is private. PR run [41019726209](https://github.com/pauloposteral/pip-public-library/actions/runs/41019726209) and push run [41029203703](https://github.com/pauloposteral/pip-public-library/actions/runs/41029203703) at `10d31811545cf743b5f122a5fd567df5288eb335` were skipped with zero steps and no runner allocated. A read-only inspection of the existing account billing page still displayed Actions budget utilization of 100% and additional usage stopped for October 1–31, 2026; that page was not reloaded, so it does not establish a fresh server balance.
+
+The current authenticated usage-summary API request exited 1 with HTTP 404 and a GitHub CLI message that the operation requires the `user` scope. No scope was added and no credential was read or copied. Remaining included minutes therefore remain unverified. Do not describe skipped jobs as executed quota failures or claim a measured remaining minute balance.
 
 No existing authorized zero-incremental-cost private runner was established. Workflow, budget and visibility were unchanged. A future allowance reset alone will not remove the private-repository job condition; any adjustment requires verified no-cost capacity and a reviewed workflow change. Publication remains gated independently of potential free public-repository CI.
