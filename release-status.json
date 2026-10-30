@@ -28,8 +28,8 @@
   "commercial_features_enabled": false,
   "spending_enabled": false,
   "git_metadata": {
-    "status": "BLOCKED",
+    "status": "VERIFIED",
     "reference": "docs/security-review.md",
-    "detail": "A fresh destination was created after authorized account email privacy was enabled. Final provider-generated refs still require direct verification before closing this gate."
+    "detail": "Final repository refs and generated PR merge use noreply identities. The root has no parents. Earlier affected objects returned authenticated 404 in this new destination; earlier checkpoints remain private and preserved. See the dated review receipt and PR #1 for the final-head recheck."
   }
 }

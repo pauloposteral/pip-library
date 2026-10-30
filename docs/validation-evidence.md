@@ -9,6 +9,7 @@ Environment: Node 24.22.1, npm 11.9.0, Linux. Preparation date: 2026-10-30 UTC.
 | Independent-review regressions before fixes | 40 passed, 2 failed, 0 skipped; exit 1 | Mixed MCP roots and historical private paths |
 | Provider-metadata gate regression before correction | 42 passed, 1 failed; exit 1 | Otherwise approved release incorrectly accepted blocked Git metadata evidence |
 | Metadata gate after correction | 43 passed, 0 failed, 0 skipped; exit 0 | Final implementer-run suite; independent review separately passed direct assertions and file validation |
+| Final MIT-licensed candidate `npm run check` | 43 passed, 0 failed, 0 skipped; 70 files valid; exit 0 | Linux standalone checkout, including license and metadata-evidence documentation; final tree is recorded in PR #1 |
 | `npm run check` after review fixes | 42 passed, 0 failed, 0 skipped; exit 0 | All local checks and complete candidate validation |
 | Isolated linked-worktree attempt | Unit tests 42 passed; `npm run check` exit 1 | Validator rejects the worktree's `.git` pointer file as unlisted/unhashed metadata. Linked-worktree validation is unsupported; use a standalone clone as in GitHub Actions. |
 | `npm audit --json` | 0 reported vulnerabilities; exit 0 | Registry advisory result for the locked development dependencies at preparation time |
