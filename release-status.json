@@ -43,6 +43,6 @@
   "repository_scope": {
     "status": "BLOCKED",
     "reference": "docs/security-review.md",
-    "detail": "Manual publication requirement: concurrent PR #2/#3 add nine files outside candidate inventory/manifest; independent static review also identified a direct-send helper bypass. Preserve and reconcile all visible refs before publication. This additional manual condition is not enforced by release:check."
+    "detail": "Repository-wide publication remains BLOCKED pending review and export reconciliation of all exposed branch and PR refs, including concurrent growth PRs #2-#5. release:check now requires repository_scope to be VERIFIED with a non-empty textual receipt. The gate checks recorded evidence; it does not perform the global review or accept the concurrent runtime."
   }
 }

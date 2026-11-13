@@ -66,3 +66,20 @@ The job's explicit condition `github.event.repository.private == false` explains
 The current authenticated usage-summary API request exited 1 with HTTP 404 and a GitHub CLI message that the operation requires the `user` scope. No scope was added and no credential was read or copied. Remaining included minutes therefore remain unverified. Do not describe skipped jobs as executed quota failures or claim a measured remaining minute balance.
 
 No existing authorized zero-incremental-cost private runner was established. Workflow, budget and visibility were unchanged. A future allowance reset alone will not remove the private-repository job condition; any adjustment requires verified no-cost capacity and a reviewed workflow change. Publication remains gated independently of potential free public-repository CI.
+
+## Repository-scope gate validation — 2026-11-12
+
+Source base: `50b8ec7d1edd8451658ede6e9f3367c8c2725118`, followed by the bounded validator/test/receipt-documentation diff in PR #1. All 71 source files were retrieved with matching Git blob hashes; the two edited code files retain exact base copies for comparison. Environment: Linux, Node 24.22.1, the existing lockfile's nine development dependencies, installed with lifecycle scripts disabled. No dependency, workflow, export allowlist, visibility or budget change was made.
+
+| Command or check | Exit | Observed result |
+| --- | --- | --- |
+| Baseline `npm test` | 0 | 50 passed, 0 failed, 0 skipped |
+| New scope regressions before the fix | 1 | 1 passed, 5 failed; missing/BLOCKED scope and invalid receipts were wrongly accepted |
+| Final `npm test` | 0 | 56 passed, 0 failed, 0 skipped |
+| `node tools/update-manifest.mjs` | 0 | Hashed the same 70 approved content paths; manifest excludes its own hash |
+| Final `npm run check` | 0 | 56 tests passed and all 71 files validated |
+| Final `npm run release:check` | 1, expected | Exactly CI receipt, client compatibility and repository-wide export review remain blocked |
+
+The release receipt retains BLOCKED for both publication and repository scope. Successful synthetic fixtures demonstrate the validator contract, not real approval of a release. The existing repository-scope object now requires VERIFIED plus a non-empty textual reference. Its review must cover all exposed refs, including concurrent growth PRs #2-#5; the validator cannot perform that review itself.
+
+Limits: no complete remote-history scan, Git object-integrity check, native Windows retest, client invocation retest or hosted CI execution was performed for this increment. The latest inspected candidate run [41031575694](https://github.com/pauloposteral/pip-public-library/actions/runs/41031575694) and the inspected later growth runs remain skipped. The local checks do not replace those missing receipts or authorize publication.

@@ -118,6 +118,7 @@ export function releaseIssues(status,licenseId,licenseText){
  for(const key of ['independent_review','ci'])if(status?.[key]?.status!=='PASS'||!status[key].reference)bad(`${key} has not passed with a receipt.`);
  if(status?.client_compatibility?.status!=='VERIFIED')bad('Independent client compatibility remains incomplete.');
  if(status?.git_metadata?.status!=='VERIFIED'||!status.git_metadata.reference)bad('Git metadata privacy has not passed, including provider-generated PR refs.');
+ if(status?.repository_scope?.status!=='VERIFIED'||typeof status.repository_scope.reference!=='string'||!status.repository_scope.reference.trim())bad('Repository-wide export review has not been verified with a receipt covering all exposed refs.');
  if(status?.commercial_features_enabled!==false||status?.spending_enabled!==false)bad('Commercial and spending gates must remain disabled.');
  return errors;
 }

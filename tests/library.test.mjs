@@ -104,11 +104,27 @@ test('untested check cannot have a passing exit code',()=>has(validateEvidence({
 test('unknown check status is rejected',()=>has(validateEvidence({...template,checks:[{id:'A',status:'MAYBE'}]}),'EVIDENCE'));
 test('release remains blocked without license and reviews',()=>has(releaseIssues({license:{approved:false},independent_review:{status:'NOT_RUN'},ci:{status:'NOT_RUN'}},'UNLICENSED','Private candidate'),'RELEASE'));
 test('release cannot pass while provider-generated Git metadata is blocked',()=>{
- const status={license:{approved:true,approval_reference:'owner decision'},independent_review:{status:'PASS',reference:'review receipt'},ci:{status:'PASS',reference:'CI receipt'},client_compatibility:{status:'VERIFIED'},commercial_features_enabled:false,spending_enabled:false,git_metadata:{status:'BLOCKED',reference:'metadata receipt'}};
+ const status={license:{approved:true,approval_reference:'owner decision'},independent_review:{status:'PASS',reference:'review receipt'},ci:{status:'PASS',reference:'CI receipt'},client_compatibility:{status:'VERIFIED'},commercial_features_enabled:false,spending_enabled:false,git_metadata:{status:'BLOCKED',reference:'metadata receipt'},repository_scope:{status:'VERIFIED',reference:'all exposed refs reviewed'}};
  has(releaseIssues(status,'MIT','MIT License\nStandard grant'),'RELEASE');
  delete status.git_metadata;
  has(releaseIssues(status,'MIT','MIT License\nStandard grant'),'RELEASE');
  status.git_metadata={status:'VERIFIED',reference:'all exposed refs inspected'};
+ assert.deepEqual(releaseIssues(status,'MIT','MIT License\nStandard grant'),[]);
+});
+const reviewedRelease={license:{approved:true,approval_reference:'owner decision'},independent_review:{status:'PASS',reference:'review receipt'},ci:{status:'PASS',reference:'CI receipt'},client_compatibility:{status:'VERIFIED'},commercial_features_enabled:false,spending_enabled:false,git_metadata:{status:'VERIFIED',reference:'metadata receipt'}};
+for(const [name,scope] of [
+ ['missing',undefined],
+ ['blocked',{status:'BLOCKED',reference:'docs/security-review.md'}],
+ ['verified without a receipt',{status:'VERIFIED'}],
+ ['verified with a blank receipt',{status:'VERIFIED',reference:'   '}],
+ ['verified with a non-text receipt',{status:'VERIFIED',reference:true}],
+])test(`release rejects ${name} repository scope`,()=>{
+ const status={...reviewedRelease};if(scope!==undefined)status.repository_scope=scope;
+ const issues=releaseIssues(status,'MIT','MIT License\nStandard grant');
+ assert.ok(issues.some(x=>x.code==='RELEASE'&&x.message.includes('Repository-wide export review')),JSON.stringify(issues));
+});
+test('release accepts reviewed repository scope when every gate passes',()=>{
+ const status={...reviewedRelease,repository_scope:{status:'VERIFIED',reference:'docs/security-review.md'}};
  assert.deepEqual(releaseIssues(status,'MIT','MIT License\nStandard grant'),[]);
 });
 test('JSON RPC result is parsed by request identity',()=>assert.deepEqual(parseRpc('{"jsonrpc":"2.0","id":7,"result":{"ok":true}}','application/json',7),{ok:true}));
