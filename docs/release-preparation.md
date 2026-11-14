@@ -1,6 +1,6 @@
 # v0.1.0 preparation receipt
 
-Preparation date: 2026-10-30 UTC. **Overall status: BLOCKED for public release.** This is an executed private candidate, not an announced open-source release. Status terms describe the scope of each row: VERIFIED is observed evidence; DONE is an existing artifact; PARTIAL is incomplete scope; BLOCKED needs a named prerequisite; NOT RUN has no execution claim.
+Preparation date: 2026-10-30 UTC. **Overall status: BLOCKED for public release.** This is an executed private candidate, not an announced open-source release. **Update 2026-11-14:** the reviewed tree is now public as [pauloposteral/pip-library](https://github.com/pauloposteral/pip-library); see [Public repository](#public-repository--2026-11-14). The v0.1.0 tag and release stay BLOCKED on client compatibility. Status terms describe the scope of each row: VERIFIED is observed evidence; DONE is an existing artifact; PARTIAL is incomplete scope; BLOCKED needs a named prerequisite; NOT RUN has no execution claim.
 
 ## Repository and content
 
@@ -16,7 +16,7 @@ Preparation date: 2026-10-30 UTC. **Overall status: BLOCKED for public release.*
 | Original-content license | DONE | The owner-approved standard MIT grant is applied in LICENSE; [decision and exclusions](license-decision.md) preserve brand, character, proprietary-asset and private-Engine ownership. |
 | Attribution | DONE | [NOTICE](../NOTICE.md), dependency license inventory and upstream links. Dependencies are not vendored; no upstream skill or character asset was copied. |
 | v0.1.0 tag and GitHub release | BLOCKED | No tag or release was created. Authenticated release listing was empty. Publication gates remain unsatisfied. |
-| Anonymous access | BLOCKED | Unauthenticated repository and v0.1.0 release REST requests each returned 404. Public README, license and skills access is NOT RUN because the repository is private. |
+| Anonymous access | VERIFIED | 2026-11-14: an unauthenticated REST request for `pauloposteral/pip-library` returned the repository as public, default branch `main`, license MIT. The v0.1.0 release lookup still fails because no release exists. The earlier 404 results applied to the private staging repository. |
 | Original application privacy | VERIFIED | Source repository remained private at final metadata inspection. No source visibility setting was changed. |
 | Origin, mission and roadmap | DONE | English [origin](why-pip-exists.md), [mission](mission.md) and [roadmap](vision-and-roadmap.md) exist in the private candidate. They are not yet publicly published. Future products are labeled future. |
 
@@ -34,8 +34,8 @@ Preparation date: 2026-10-30 UTC. **Overall status: BLOCKED for public release.*
 | Git history scan | VERIFIED | `node tools/validate-library.mjs --history`: exit 0; filenames and historical blobs checked. `git fsck --full`: exit 0. |
 | Dependency advisories | VERIFIED | `npm audit --json`: exit 0, zero reported vulnerabilities for locked development dependencies at check time. This is not a full source audit. |
 | Independent code/security review | VERIFIED | Independent AI review inspected the initial complete export and history; no Critical finding or actual private payload found. Two Important validator weaknesses were reproduced and corrected with passing regressions. Scope and three deferred minor findings are in [the review](security-review.md). The portability increment received a separate independent review that found and reverified closure of one fixture issue. No external certification is claimed. |
-| GitHub Actions | PARTIAL | Workflow exists with read-only permissions, pinned first-party actions, no secrets, no privileged contribution trigger and no persisted checkout credential. The original private staging run was skipped with zero executed steps; hosted CI is not passed. The current destination run is recorded in PR #1. The direct skip cause is the private-repository job condition. The existing account page still displays 100% Actions budget and blocked extra usage. A fresh usage-summary API request failed with HTTP 404 and a required user-scope message; no scope expansion occurred. Included minutes remain unverified. |
-| Publication gate | BLOCKED | `npm run release:check` intentionally exits 1 while hosted CI and client compatibility remain incomplete. The license and Git metadata gates pass. Disabled spending and commercial features are required. |
+| GitHub Actions | VERIFIED | 2026-11-14: on the public repository, push run [43534590972](https://github.com/pauloposteral/pip-library/actions/runs/43534590972) at `8f0f375` ran every step and passed: locked `npm ci --ignore-scripts`, `npm run check` and the history scan. Earlier history: workflow exists with read-only permissions, pinned first-party actions, no secrets, no privileged contribution trigger and no persisted checkout credential. The original private staging run was skipped with zero executed steps; hosted CI is not passed. The current destination run is recorded in PR #1. The direct skip cause is the private-repository job condition. The existing account page still displays 100% Actions budget and blocked extra usage. A fresh usage-summary API request failed with HTTP 404 and a required user-scope message; no scope expansion occurred. Included minutes remain unverified. |
+| Publication gate | BLOCKED | 2026-11-14: `npm run release:check` exits 1 only because client compatibility remains incomplete. License, review, hosted CI, Git metadata and repository-scope gates pass. Disabled spending and commercial features are required. |
 
 Tests validate the library, not the private application. Scanning is heuristic and does not prove the absence of every possible secret. The synthetic task-list and QA sample artifacts are explicitly labeled; they are not counted as executed product tests. Hashes and links do not themselves establish legal ownership.
 
@@ -69,6 +69,8 @@ The [compatibility matrix](compatibility.md) records stage-specific results. Raw
 
 ## Concurrent branches and publication scope
 
+**Update 2026-11-14:** publication used a separate public repository, so the concurrent refs below are not exposed. See [Public repository](#public-repository--2026-11-14).
+
 **BLOCKED:** concurrent draft PRs #2 and #3 add nine growth files outside the candidate's 71-file export inventory and hashes. Their branches remain separate and preserved. Publishing this repository would also expose those refs; the candidate review does not authorize their export automatically. A scoped independent inspection found no actual secret in the new files/patches and verified noreply metadata, but identified a static gate-bypass concern in the Telegram helper. No runtime or outreach ran. [Exact scope and finding](security-review.md#concurrent-ref-review). This manual repository-wide publication condition is additional to the automated CI/client gate; it is not silently treated as passed.
 
 ## Implementation rulings and deferred work
@@ -82,5 +84,19 @@ Deferred minor findings: separate prepublication and postpublication gates; add 
 ## Next three reviewable increments
 
 1. **PARTIAL — Remaining client verification:** native Windows validation and a real Codex FAQ invocation are now complete. Finish Claude, Copilot and Lovable stages and applicable permission-denial checks without paid model turns or changing personal settings.
-2. **BLOCKED — CI and repository-wide review:** establish verified no-cost hosted capacity and review the private-job condition before execution. Reconcile the nine extra files and static runtime concern in concurrent PRs #2/#3; preserve those branches. Recheck all refs and generated Git metadata before publication.
+2. **DONE for pip-library (2026-11-14) — CI and repository-wide review:** hosted CI passed on the public repository, which exposes only `main`. The text below is the original plan for the private staging repository.
+   **Original plan:** establish verified no-cost hosted capacity and review the private-job condition before execution. Reconcile the nine extra files and static runtime concern in concurrent PRs #2/#3; preserve those branches. Recheck all refs and generated Git metadata before publication.
 3. **BLOCKED — Public release and observed activation:** after gates pass, integrate the candidate, publish only this repository, tag/release v0.1.0, verify anonymous repository/README/license/skills/release access and source privacy, then begin consent-based interviews and measure real activation. Do not retroactively mark targets as achieved.
+
+## Public repository — 2026-11-14
+
+The reviewed candidate tree was published as a new public repository, [pauloposteral/pip-library](https://github.com/pauloposteral/pip-library). The private staging repository `pip-public-library` keeps the growth work and its PRs #2–#5; none of that is in the public repository.
+
+| Check | Status | Observed result |
+| --- | --- | --- |
+| Exposed refs | VERIFIED | REST listing on 2026-11-14: one branch (`main` at `8f0f375`), 0 tags, 0 releases, 0 pull requests. The commits are the reviewed candidate history with noreply identities. |
+| Anonymous access | VERIFIED | Unauthenticated REST request: public, default branch `main`, license MIT. |
+| Hosted CI | VERIFIED | Push run [43534590972](https://github.com/pauloposteral/pip-library/actions/runs/43534590972) at `8f0f375`: checkout, locked install without scripts, `npm run check` and `--history` all succeeded. |
+| v0.1.0 tag and release | BLOCKED | Not created. Waits on the remaining client checks and an explicit owner decision. |
+
+Limits: no outreach, interviews or analytics started, and no client check was rerun for this update.

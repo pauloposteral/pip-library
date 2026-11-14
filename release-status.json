@@ -12,9 +12,9 @@
     "detail": "Initial independent review findings closed with regressions. Separate portability review independently reproduced and reverified closure of its fixture finding; 50 tests and 71-file validation passed. Scope and limits are recorded in the review receipt."
   },
   "ci": {
-    "status": "PARTIAL",
+    "status": "PASS",
     "reference": "docs/validation-evidence.md",
-    "detail": "Linux and complete native Windows checks pass locally. Hosted jobs skip because of the private-repository condition. Fresh billing API request failed with HTTP 404 and requires unavailable user scope; included capacity remains unverified. No verified zero-cost private hosted path."
+    "detail": "Public repository pauloposteral/pip-library: push run 43534590972 at 8f0f375 ran checkout, locked npm ci --ignore-scripts, npm run check and --history; all steps succeeded (2026-11-14)."
   },
   "client_compatibility": {
     "status": "PARTIAL",
@@ -22,9 +22,9 @@
     "detail": "Windows Codex 0.164.0 independently discovered all three tools and invoked get_faq through app-server. Claude Windows 2.1.310 registration/Connected and project Pending approval/Rejected observed; its discovery/invocation, Copilot/Lovable and tool-denial checks remain incomplete."
   },
   "public_access": {
-    "status": "BLOCKED",
+    "status": "VERIFIED",
     "reference": "docs/release-preparation.md",
-    "detail": "Unauthenticated repository and v0.1.0 release REST lookups returned 404; repository remains private."
+    "detail": "Unauthenticated REST lookup of pauloposteral/pip-library on 2026-11-14 returned a public repository, default branch main, license MIT. No v0.1.0 release exists."
   },
   "commercial_features_enabled": false,
   "spending_enabled": false,
@@ -41,8 +41,8 @@
     "detail": "Node 24.13.0/npm 11.6.2; core.autocrlf=true; check/history/fsck exit 0; 50 passed, zero failed/skipped; 71 files; four commits; temporary checkout removed."
   },
   "repository_scope": {
-    "status": "BLOCKED",
-    "reference": "docs/security-review.md",
-    "detail": "Repository-wide publication remains BLOCKED pending review and export reconciliation of all exposed branch and PR refs, including concurrent growth PRs #2-#5. release:check now requires repository_scope to be VERIFIED with a non-empty textual receipt. The gate checks recorded evidence; it does not perform the global review or accept the concurrent runtime."
+    "status": "VERIFIED",
+    "reference": "docs/release-preparation.md",
+    "detail": "pip-library exposes only main at 8f0f375 (0 tags, 0 releases, 0 pull requests, checked 2026-11-14). The growth PRs #2-#5 stay in the private pip-public-library repository and are not exposed. The gate checks recorded evidence; it does not query GitHub itself."
   }
 }

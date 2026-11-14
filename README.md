@@ -4,7 +4,7 @@
 
 Open tools, agent skills, and verifiable workflows for turning ideas into trustworthy software.
 
-**v0.1.0 candidate — private staging. MIT license approved; public release review is pending.**
+**v0.1.0 candidate — public repository, MIT license. No tagged release yet: client compatibility checks are still open.**
 
 PIP by POSTERAL helps creators distinguish a proposal, an implementation, a test result, and a release decision. A convincing demo is useful; it is not sufficient evidence that a product is ready to ship.
 

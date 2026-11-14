@@ -14,8 +14,8 @@ Environment: Node 24.22.1, npm 11.9.0, Linux. Preparation date: 2026-10-30 UTC.
 | Historical linked-worktree attempt | Unit tests 42 passed; `npm run check` exit 1 | The earlier validator rejected the worktree's `.git` pointer. Corrected and revalidated in the portability increment below. |
 | `npm audit --json` | 0 reported vulnerabilities; exit 0 | Registry advisory result for the locked development dependencies at preparation time |
 | `node tools/mcp-smoke.mjs` | See [real receipt](mcp-verification.json) | Raw legacy MCP discovery and FAQ invocation |
-| GitHub-hosted CI | SKIPPED, not passed | Original private staging run; no job steps ran. Current destination evidence is linked from PR #1. Hosted execution is unavailable within the current zero-spending constraint. |
-| Unauthenticated repository/release access | HTTP 404 for both REST lookups | Candidate remains private; no v0.1.0 release exists. This is not a public-access pass. |
+| GitHub-hosted CI | PASS on the public repository (2026-11-14) | Push run [43534590972](https://github.com/pauloposteral/pip-library/actions/runs/43534590972) at `8f0f375` on `pauloposteral/pip-library` ran every step and succeeded. Earlier: original private staging run; no job steps ran. Current destination evidence is linked from PR #1. Hosted execution is unavailable within the current zero-spending constraint. |
+| Unauthenticated repository/release access | 2026-11-14: repository public; release lookup fails | `pauloposteral/pip-library` answers anonymously as public, MIT, default branch `main`. No v0.1.0 release exists. The earlier 404 results applied to the private staging repository. |
 
 The local test output is an execution result, not the synthetic example report. Test counts cover the library validation code, not any private PIP application or customer project. Independent review and final candidate checks are recorded separately before a release decision.
 
