@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "synthetic": false,
+  "scope": "Read-only public storefront geometry observations; not payment or sales evidence",
+  "site_url": "https://www.coisou.store/",
+  "product_url": "https://www.coisou.store/produto/mascara-termica-de-esqui-winter-pro/",
+  "public_build_manifest_url": "https://www.coisou.store/catalog-build.json",
+  "public_source_revision": "2ea135185ec8f74d103884faccb818c7f156c401",
+  "build_manifest_checked_at": "2026-11-24T15:57:30.792336Z",
+  "environment": "Playwright Chromium browser emulation, 390 by 844 CSS pixels; not physical devices",
+  "baseline": {
+    "started_at": "2026-11-24T15:17:25.469Z",
+    "finished_at": "2026-11-24T15:17:44.852Z",
+    "original_receipt_sha256": "eef019c07885f22559bda015791dc9cd156db4ccf1503d0e6878e525fd09c6a5",
+    "first_home_photo_top_px": 492.15625,
+    "product_purchase_control_top_px": 1094.078125,
+    "scroll_to_reveal_purchase_control_px": 322.078125,
+    "home_grid_columns": 2
+  },
+  "production": {
+    "started_at": "2026-11-24T15:54:18.082Z",
+    "finished_at": "2026-11-24T15:55:10.262Z",
+    "original_receipt_sha256": "84c4ddbc88421bc6e8f6026a268c301754acef63160b53e82652367c8c513c67",
+    "first_home_photo_top_px": 220,
+    "product_purchase_control_top_px": 765.21875,
+    "scroll_to_reveal_purchase_control_px": 0,
+    "home_grid_columns": 2,
+    "viewport_widths_px": [320, 375, 390, 430, 768, 1024, 1440, 1920],
+    "observed_horizontal_overflow_px": 0,
+    "observed_visible_broken_images": 0,
+    "observed_javascript_page_errors": 0
+  },
+  "review_scope": "Values compared with original browser receipts; public build revision fetched independently; no raw private receipt or storefront source is redistributed",
+  "release_decision": "UNVERIFIED",
+  "limitations": [
+    "This is a selected measurement receipt, not an executable release approval manifest.",
+    "The original complete receipts are retained by the operator; their hashes do not make them public or independently reproducible.",
+    "Observed pages and visible images only; not a full catalog certification.",
+    "No payment, customer information submission or production mutation was performed.",
+    "No physical-device, Instagram-app, field Web Vitals, conversion-uplift or full WCAG claim is made."
+  ]
+}
