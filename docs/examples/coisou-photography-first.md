@@ -40,3 +40,15 @@ The browser run was read-only. It did not place an order, create a payment or su
 5. Compare the same pages and viewport after the change, and distinguish public-site observations from local builds and simulated commerce.
 
 Original PiP documentation, published with the owner's authorization under the library's MIT license. The store's trademarks, photographs and catalog are not relicensed by this document. See the [release evidence standard](../release-evidence-standard.md) for the distinction between observed checks and release approval.
+
+## Follow-up: quantity selection and complementary pairs
+
+Public observation: 24 November 2026, 19:38:13–19:38:32 UTC (16:38:13–16:38:32 Brasília time, UTC−03:00). This is a later interface observation; the earlier geometry measurements above remain unchanged.
+
+The [vegetable cutter](https://www.coisou.store/produto/cortador-de-legumes-15-em-1/) and [TravelMate bag](https://www.coisou.store/produto/bolsa-de-viagem-com-bolsos-travelmate/) pages provide choices for one, two, three or four units and show the unit price alongside the calculated total. Complementary-pair controls were observed on those pages. The controls communicate their unavailable purchase state; their presence does not establish that a customer can pay.
+
+A read-only Chromium run covered both pages at widths of 320, 375, 390, 430, 768, 1024, 1440 and 1920 CSS pixels. The execution receipt recorded 164 successful checks across 16 page/viewport cases and retained 22 screenshots. In that scope, no JavaScript page errors, monitored HTTP errors, broken visible images or horizontal overflow were recorded. Quantity-total arithmetic and the unavailable state of purchase controls were checked. After compacting the quantity area, all 16 cases showed the full main purchase control within the initial viewport, with zero scroll required to reveal it. No write requests, orders, payments or customer-information submissions were made by this run.
+
+The [public build manifest](https://www.coisou.store/catalog-build.json) reported revision `a8007a53156e836f75dedaaa102720aeee82692e` both before and after the observation. The original execution receipt has SHA256 `3a07f5dd55e7227724bf10613bff4fafca13855b9fdc693315d3fb5c1190059c`. The operator retains that receipt and the screenshots; their hashes and counts do not make those artifacts public or independently reproducible.
+
+This observation supports a bounded interface lesson: present quantity, unit price, total and availability together, and keep a complementary suggestion subordinate to the purchase task. It does not demonstrate a discount, a conversion increase, a completed checkout, payment eligibility, physical-device coverage, field performance or complete accessibility conformance. Purchase actions remained unavailable during the run. This addendum records public interface evidence and does not approve a commercial launch or a PiP library release.
