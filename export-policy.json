@@ -117,6 +117,12 @@
       "sensitivity": "PUBLIC_CANDIDATE"
     },
     {
+      "path": "docs/examples/coisou-photography-first.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
       "path": "docs/examples/index.md",
       "origin": "PIP_ORIGINAL",
       "license": "MIT",
@@ -316,6 +322,12 @@
     },
     {
       "path": "examples/qa/README.md",
+      "origin": "PIP_ORIGINAL",
+      "license": "MIT",
+      "sensitivity": "PUBLIC_CANDIDATE"
+    },
+    {
+      "path": "examples/qa/coisou-public-geometry-20261124.json",
       "origin": "PIP_ORIGINAL",
       "license": "MIT",
       "sensitivity": "PUBLIC_CANDIDATE"
